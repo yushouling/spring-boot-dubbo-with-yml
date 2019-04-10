@@ -1,0 +1,14 @@
+server:
+  # tomcat端口，部署多个服务时修改
+  port: 8080
+spring:
+  application:
+    name: dubbo-consumer
+# dubbo配置，详见文件spring-configuration-metadata.json
+dubbo:
+  registry:
+    address: zookeeper://127.0.0.1:2181
+    file: cache/dubbo-${spring.application.name}.cache
+    timeout: 2000
+    # zookeeper节点名称，必须与provider端保持一致，可选
+    group: dubbo/20190410

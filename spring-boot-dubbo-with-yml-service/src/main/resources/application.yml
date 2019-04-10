@@ -1,0 +1,35 @@
+server:
+  # tomcat端口，部署多个服务时修改
+  port: 8081
+# dubbo配置，详见文件spring-configuration-metadata.json
+dubbo:
+  scan:
+    # 扫描dubbo @Service注解包路径
+    base-packages: com.example
+  application:
+    name: ${spring.application.name}
+  registry:
+    address: zookeeper://127.0.0.1:2181
+    file: cache/dubbo-${spring.application.name}.cache
+    check: false
+    timeout: 5000
+    # zookeeper节点名称，必须与consumer端保持一致，可选
+    group: dubbo/20190410
+  protocol:
+    # dubbo端口，部署多个服务时修改
+    port: 20880
+    # 业务线程池大小(固定大小)，默认200
+    threads: 300
+    # accepts: 服务提供方最大可接受连接数，默认0表示不限制
+  consumer:
+    lazy: true
+    # 超时时间：毫秒
+    timeout: 2000
+    check: false
+    # 超时重试次数
+    retries: 1
+    # 负载均衡策略：最不活跃
+    loadbalance: leastactive
+spring:
+  application:
+    name: dubbo-provider
